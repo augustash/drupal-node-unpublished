@@ -1,0 +1,91 @@
+<?php
+
+/**
+ * @file
+ * Contains node_unpublished.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\Access\AccessResult;
+use Drupal\Core\Session\AccountInterface;
+use Drupal\node\NodeInterface;
+
+/**
+ * Implements hook_help().
+ */
+function node_unpublished_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the node_unpublished module.
+    case 'help.page.node_unpublished':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Provides node alterations to allow access to view all unpublished and alter status.') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements hook_node_access_records().
+ */
+function node_unpublished_node_access_records(NodeInterface $node) {
+  // We only care about the node if is unpublished. If not, it is
+  // treated just like any other node and we completely ignore it.
+  if ($node->isPublished() === FALSE) {
+    $grants = array();
+    // Unpublished nodes should be viewable to all editors.
+    $grants[] = array(
+      'realm' => 'node_unpublished_view_unpublished',
+      'gid' => 1,
+      'grant_view' => 1,
+      'grant_update' => 0,
+      'grant_delete' => 0,
+      'priority' => 0,
+    );
+    $grants[] = array(
+      'realm' => 'view_unpublished_author',
+      'gid' => $node->getOwnerId(),
+      'grant_view' => 1,
+      'grant_update' => 0,
+      'grant_delete' => 0,
+      'priority' => 0,
+    );
+    return $grants;
+  }
+}
+
+/**
+ * Implements hook_node_grants().
+ */
+function node_unpublished_node_grants(AccountInterface $account, $op) {
+  $grants = array();
+  if ($op == 'view') {
+    if ($account->hasPermission('view own unpublished content')) {
+      $grants['view_unpublished_author'] = array($account->id());
+    }
+    if ($account->hasPermission('override node publish options')) {
+      $grants['node_unpublished_view_unpublished'] = array(1);
+      return $grants;
+    }
+  }
+  return $grants;
+}
+
+
+/**
+ * Implements hook_entity_field_access_alter().
+ */
+function node_unpublished_entity_field_access_alter(array &$grants, array $context) {
+  $entity_type = $context['field_definition']->getTargetEntityTypeId();
+
+  if ($entity_type == 'node' && $context['operation'] == 'edit' && !$context['account']->hasPermission('administer nodes')) {
+
+    switch ($context['field_definition']->getName()) {
+
+      case 'status':
+        $grants[':default'] = AccessResult::allowedIfHasPermission($context['account'], 'override node publish options');
+        break;
+    }
+  }
+}

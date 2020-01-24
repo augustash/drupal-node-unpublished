@@ -1,0 +1,3 @@
+override node publish options:
+  title: 'Override node publish options'
+  description: 'Allow user to view all unpublished nodes and alter the publish status'
