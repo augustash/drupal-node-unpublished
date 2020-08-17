@@ -33,7 +33,7 @@ function node_unpublished_node_access_records(NodeInterface $node) {
   // We only care about the node if is unpublished. If not, it is
   // treated just like any other node and we completely ignore it.
   if ($node->isPublished() === FALSE) {
-    $grants = array();
+    $grants = [];
     // Unpublished nodes should be viewable to all editors.
     $grants[] = array(
       'realm' => 'node_unpublished_view_unpublished',
@@ -59,13 +59,13 @@ function node_unpublished_node_access_records(NodeInterface $node) {
  * Implements hook_node_grants().
  */
 function node_unpublished_node_grants(AccountInterface $account, $op) {
-  $grants = array();
+  $grants = [];
   if ($op == 'view') {
     if ($account->hasPermission('view own unpublished content')) {
-      $grants['view_unpublished_author'] = array($account->id());
+      $grants['view_unpublished_author'][] = $account->id();
     }
     if ($account->hasPermission('override node publish options')) {
-      $grants['node_unpublished_view_unpublished'] = array(1);
+      $grants['node_unpublished_view_unpublished'][] = 1;
       return $grants;
     }
   }
