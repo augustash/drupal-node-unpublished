@@ -1,6 +1,7 @@
 # Node Unpublished
+<img src="https://badgen.net/badge/version/8.x-1.0.0/cyan?icon=github" alt="Version: 8.x-1.0"/>
 
-Adds a permission to allow roles to view all unpublished nodes and change node status.
+Adds a new permission set to allow set roles to view all unpublished nodes and alter node status.
 
 Inspired by [Override Node Options](https://www.drupal.org/project/override_node_options) and [View Unpublished](https://www.drupal.org/project/view_unpublished)
 
