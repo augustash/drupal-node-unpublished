@@ -1,5 +1,5 @@
 # Node Unpublished
-<img src="https://badgen.net/badge/version/8.x-1.0.0/cyan?icon=github" alt="Version: 8.x-1.0"/>
+<img src="https://badgen.net/badge/version/2.0/cyan?icon=github" alt="Version: 2.0"/>
 
 Adds a new permission set to allow set roles to view all unpublished nodes and alter node status.
 
