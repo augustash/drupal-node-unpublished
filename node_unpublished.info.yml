@@ -2,4 +2,4 @@ name: 'Node Unpublished'
 description: 'Provides alterations to allow users to view all unpublished nodes and alter the publish status'
 package: Custom
 type: module
-core: 8.x
+core_version_requirement: ^8.8 || ^9
