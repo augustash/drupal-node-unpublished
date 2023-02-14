@@ -1,9 +1,9 @@
 {
-  "name": "weberjacob/node_unpublished",
+  "name": "augustash/node_unpublished",
   "description": "Adds a new permission set to allow defined roles to view all unpublished nodes and alter node status.",
   "type": "drupal-module",
   "license": "proprietary",
-  "homepage": "https://github.com/weberjacob/node_unpublished/tree/2.0",
+  "homepage": "https://github.com/augustash/drupal-node-unpublished/tree/2.0",
   "authors": [
     {
       "name": "Jacob Weber",
@@ -12,8 +12,8 @@
     }
   ],
   "support": {
-    "issues": "https://github.com/weberjacob/node_unpublished/issues",
-    "source": "https://github.com/weberjacob/node_unpublished/tree/2.0"
+    "issues": "https://github.com/augustash/node_unpublished/issues",
+    "source": "https://github.com/augustash/drupal-node-unpublished/tree/2.0"
   },
   "minimum-stability": "dev",
   "require": {
