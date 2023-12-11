@@ -1,7 +1,7 @@
 {
   "name": "augustash/node_unpublished",
   "description": "Adds a new permission set to allow defined roles to view all unpublished nodes and alter node status.",
-  "type": "drupal-module",
+  "type": "drupal-custom-module",
   "license": "proprietary",
   "homepage": "https://github.com/augustash/drupal-node-unpublished/tree/2.0",
   "authors": [
